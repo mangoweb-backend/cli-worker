@@ -1,0 +1,33 @@
+{
+	"name": "mangoweb/cli-worker",
+	"type": "library",
+	"description": "WorkerCommand",
+	"license": "proprietary",
+	"version": "0.1",
+	"authors": [
+		{
+			"name": "manGoweb",
+			"email": "info@mangoweb.org"
+		}
+	],
+	"require": {
+		"php": "~7.1",
+		"mangoweb/clock": "@dev",
+		"psr/log": "~1.0",
+		"symfony/console": "~3.4 | ~4.0"
+	},
+	"require-dev": {
+		"phpstan/phpstan-shim": "~0.9"
+	},
+	"autoload": {
+		"psr-4": {
+			"Mangoweb\\CliWorker\\": "src/"
+		}
+	},
+	"config": {
+		"preferred-install": "dist",
+		"optimize-autoloader": true,
+		"classmap-authoritative": true,
+		"bin-compat": "full"
+	}
+}
