@@ -106,12 +106,10 @@ abstract class WorkerCommand extends Command
 			}
 		}
 
-		if ($count > 0) {
-			$this->logger->info(sprintf('%s: finished', $this->getName()), [
-				'processedCount' => $count,
-				'limit' => $limit,
-			]);
-		}
+		$this->logger->info(sprintf('%s: finished', $this->getName()), [
+			'processedCount' => $count,
+			'exitCode' => $this->exitCode,
+		]);
 
 		return $this->exitCode ?: 0;
 	}
