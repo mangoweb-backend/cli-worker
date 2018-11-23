@@ -148,37 +148,14 @@ abstract class WorkerCommand extends Command
 	}
 
 
-	/**
-	 * @see https://github.com/symfony/symfony/blob/522d079110a9b69043af5778b28594b8f2169714/src/Symfony/Component/HttpKernel/DataCollector/MemoryDataCollector.php#L92-L119
-	 */
 	private function getMemoryLimitInBytes(): int
 	{
-		$memoryLimit = ini_get('memory_limit');
+		$memoryLimit = ini_get('memory_limit') ?: '-1';
+		$max = intval($memoryLimit, 0);
 
-		if ($memoryLimit === '-1') {
-			return -1;
-		}
+		$unit = strtolower(substr($memoryLimit, -1));
+		$shift = ['k' => 10, 'm' => 20, 'g' => 30, 't' => 40][$unit] ?? 0;
 
-		$memoryLimit = strtolower($memoryLimit);
-		$max = strtolower(ltrim($memoryLimit, '+'));
-
-		if (strpos($max, '0x') === 0) {
-			$max = intval($max, 16);
-
-		} elseif (strpos($max, '0') === 0) {
-			$max = intval($max, 8);
-
-		} else {
-			$max = (int) $max;
-		}
-
-		switch (substr($memoryLimit, -1)) {
-			case 't': $max *= 1024; // intentionally without break
-			case 'g': $max *= 1024; // intentionally without break
-			case 'm': $max *= 1024; // intentionally without break
-			case 'k': $max *= 1024; // intentionally without break
-		}
-
-		return $max;
+		return $max << $shift;
 	}
 }
