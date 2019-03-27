@@ -1,7 +1,7 @@
 {
 	"name": "mangoweb/cli-worker",
 	"type": "library",
-	"description": "WorkerCommand",
+	"description": "Base class for worker commands with signal handling",
 	"license": "MIT",
 	"authors": [
 		{
@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": "~7.1",
-		"mangoweb/clock": "@dev",
+		"mangoweb/clock": "~0.2.0",
 		"psr/log": "~1.0",
 		"symfony/console": "~3.4 | ~4.0"
 	},
@@ -22,11 +22,5 @@
 		"psr-4": {
 			"Mangoweb\\CliWorker\\": "src/"
 		}
-	},
-	"config": {
-		"preferred-install": "dist",
-		"optimize-autoloader": true,
-		"classmap-authoritative": true,
-		"bin-compat": "full"
 	}
 }
