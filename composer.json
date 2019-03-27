@@ -3,7 +3,6 @@
 	"type": "library",
 	"description": "WorkerCommand",
 	"license": "MIT",
-	"version": "0.1",
 	"authors": [
 		{
 			"name": "manGoweb",
