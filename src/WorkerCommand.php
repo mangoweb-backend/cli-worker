@@ -58,9 +58,10 @@ abstract class WorkerCommand extends Command
 		// now both signals are not dispatched until pcntl_signal_dispatch() is called
 		// which prevents termination of worker in the middle of a job
 		if (function_exists('pcntl_signal')) {
-			pcntl_signal(SIGHUP, [$this, 'handleSignal']);
-			pcntl_signal(SIGINT, [$this, 'handleSignal']);
-			pcntl_signal(SIGTERM, [$this, 'handleSignal']);
+			$callback = \Closure::fromCallable([$this, 'handleSignal']);
+			pcntl_signal(SIGHUP, $callback);
+			pcntl_signal(SIGINT, $callback);
+			pcntl_signal(SIGTERM, $callback);
 		}
 
 		while ($limit === 0 || $count < $limit) {
